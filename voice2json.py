@@ -51,14 +51,69 @@ def serialize_html_to_record(raw):
 
     return record
 
+def serialize_text_to_record(raw):
+    soup = BeautifulSoup(raw, 'html.parser')
+
+    sender = []
+    messages = []
+    dates = []
+    conversation = []
+    contributors = []
+    #It seems like messages from others are the the "span" tag and messages from you are in "abbr"
+    for contributor in soup.find_all('cite', class_='sender'):
+        if contributor.find('span', class_='fn'):
+            sender.append({
+                'name': contributor.find('span', class_='fn').string or '',
+                'tel': convert_to_tel(contributor.find('a', class_='tel')['href'])
+            })
+        if contributor.find('abbr', class_='fn'):
+            sender.append({
+                'name': contributor.find('abbr', class_='fn').string or '',
+                'tel': convert_to_tel(contributor.find('a', class_='tel')['href'])
+            })
+    for message in soup.find_all('q'):
+        messages.append(message.text)
+    
+    for date in soup.find_all('abbr', class_='dt'):
+        dates.append(date["title"])
+    
+    for item in sender:
+        if item not in contributors:
+            contributors.append(item)
+
+    #In case there is a message where the other side didn't respond. Tel is not given and will have to map later :/
+    if (len(contributors) == 1) and contributors[0]["name"] == "Me":
+            title = soup.find('title').text.split("\n")[-1]
+            if "+" in title:
+                contributors.append({'name': title, 'tel':title})
+            else:
+                 contributors.append({'name': title, 'tel': ""})
+
+    for i in range(0, len(messages)):
+        conversation.append({"sender": sender[i], "message" : messages[i], "date" : dates[i]})
+    record = {
+        'date':dates[0],
+        'contributors' : contributors,
+        'conversation': conversation,
+        'tags': [convert_to_type(a['href']) for a in
+                 soup.find_all('a', rel='tag')],
+
+    }
+
+    return record
+
 
 def serialize_files_to_json(paths):
     records = []
     for path in paths:
+        # print path
         with open(path) as f:
-            print path
-            serialized = serialize_html_to_record(f.read())
-            records.append(serialized)
+            if "Text" in path:
+                serialized = serialize_text_to_record(f.read())
+                records.append(serialized)
+            else:
+                serialized = serialize_html_to_record(f.read())
+                records.append(serialized)
 
     records.sort(key=itemgetter('date'))
     return json.dumps({'records': records}, indent=4)
@@ -76,11 +131,6 @@ def main():
     args = parser.parse_args()
 
     files = glob.glob(os.path.join(args.source, '*.html'))
-
-    # Ignore text messages from pre-Hangouts integration, they're funky and
-    # they don't follow the same formatting as everything else.
-    # [FIXME: Support these somehow?]
-    files = filter(lambda f: 'Text' not in f, files)
 
     json = serialize_files_to_json(files)
 
