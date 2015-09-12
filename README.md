@@ -1,9 +1,9 @@
 voice2json
 =============
 
-*Export your Google Voice call history as JSON*
+*Export your Google Voice call & text history as JSON*
 
-Google Takeout only offers HTML export of your Google Voice call records. `voice2json` converts these HTML files into machine-readable JSON for easier analysis.
+Google Takeout only offers HTML export of your Google Voice call and text message records. `voice2json` converts these HTML files into machine-readable JSON for easier analysis.
 
 ## Usage
 
@@ -36,6 +36,8 @@ optional arguments:
 ```js
 {
     "records": [
+
+        // Calls, voicemails, etc...
         {
             "date": "2013-01-27T04:21:24.000Z", // ISO-formatted date
             "duration": 56000.0, // If applicable, the duration of the call
@@ -51,6 +53,37 @@ optional arguments:
                 ...
             ]
         },
+
+        // Text messages
+        {
+            "date": "2014-05-07T19:26:51.780Z", // ISO-formatted start date of conversation
+            "conversation": [ // A list of messages in the conversation
+                {
+                    "date": "2014-05-07T19:26:51.780Z", // ISO-formatted date of message
+                    "message": "I'm right behind you.",
+                    "sender": {
+                        "tel": "+01234567890", // Stringified telephone number containing country code
+                        "name": "John Doe" // Name (if known, otherwise an empty string)
+                    }
+                }, 
+                ...
+            ], 
+            "contributors": [
+                {
+                    "tel": "+01234567890", // Stringified telephone number containing country code
+                    "name": "John Doe" // Name (if known, otherwise an empty string)
+                }, 
+                {
+                    "tel": "+01234567890", // Your phone number
+                    "name": "Me"
+                }
+            ], 
+            "tags": [ // A list of tags for the conversation
+                "inbox", 
+                "sms"
+            ]
+        }
+
         ...
 }
 ```
@@ -63,5 +96,6 @@ Possible tags include:
  - **inbox** &ndash; an item in the Google Voice inbox (e.g., a voicemail)
  - **voicemail** &ndash; a voicemail message
  - **unread** &ndash; used in conjunction with a voicemail to indicate that it is unread
+ - **sms** &ndash; a text message
 
 Happy analyzing!
