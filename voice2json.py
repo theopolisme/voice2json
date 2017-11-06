@@ -1,5 +1,6 @@
 import os
 import re
+import io
 import sys
 import glob
 import json
@@ -123,7 +124,7 @@ def serialize_text_messages_to_record(raw):
 def serialize_files_to_json(paths):
     records = []
     for path in paths:
-        with open(path) as f:
+        with io.open(path, 'r', encoding='utf8') as f:
             if 'Text' in path:
                 serialized = serialize_text_messages_to_record(f.read())
                 records.append(serialized)
