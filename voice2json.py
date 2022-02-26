@@ -24,7 +24,7 @@ def serialize_general_to_record(raw):
 	for contributor in soup.find_all('div', class_ = 'contributor'):
 		contributors.append({
 			'name': contributor.find('span', class_ = 'fn').string or '',
-			'tel': convert_to_tel(contributor.find('a', class_ = 'tel')['href'])
+			'tel' : convert_to_tel(contributor.find('a', class_ = 'tel')['href'])
 		})
 	record = {
 		'tags': [convert_to_type(a['href']) for a in
@@ -52,13 +52,13 @@ def serialize_text_messages_to_record(raw):
 		if contributor.find('span', class_ = 'fn'):
 			sender.append({
 				'name': contributor.find('span', class_ = 'fn').string or '',
-				'tel': convert_to_tel(
+				'tel' : convert_to_tel(
 					contributor.find('a', class_ = 'tel')['href'])
 			})
 		if contributor.find('abbr', class_ = 'fn'):
 			sender.append({
 				'name': contributor.find('abbr', class_ = 'fn').string or '',
-				'tel': convert_to_tel(
+				'tel' : convert_to_tel(
 					contributor.find('a', class_ = 'tel')['href'])
 			})
 	for message in soup.find_all('q'):
@@ -75,18 +75,18 @@ def serialize_text_messages_to_record(raw):
 			if '+' in title:
 				contributors.append({
 					'name': title,
-					'tel': title
+					'tel' : title
 				})
 			else:
 				contributors.append({
 					'name': title,
-					'tel': ''
+					'tel' : ''
 				})
 	for i in range(0, len(messages)):
 		conversation.append({
-			'sender': sender[i],
+			'sender' : sender[i],
 			'message': messages[i],
-			'date': dates[i]
+			'date'   : dates[i]
 		})
 	record = {
 		'date': dates[0],
