@@ -12,9 +12,10 @@ def convert_to_tel(s):
 # 
 def convert_to_duration(s):
 	r = re.search(DURATION_RE, s)
-	td = datetime.timedelta(hours=int(r.group(1) or 0),
-							minutes=int(r.group(2) or 0),
-							seconds=int(r.group(3) or 0))
+	td = datetime.timedelta(
+		hours   = int(r.group(1) or 0),
+		minutes = int(r.group(2) or 0),
+		seconds = int(r.group(3) or 0))
 	return td.total_seconds() * 1000
 # 
 def serialize_general_to_record(raw):
@@ -39,9 +40,9 @@ def serialize_general_to_record(raw):
 def serialize_text_messages_to_record(raw):
 	soup = BeautifulSoup(raw, 'html.parser')
 	# 
-	sender = []
-	messages = []
-	dates = []
+	sender       = []
+	messages     = []
+	dates        = []
 	conversation = []
 	contributors = []
 	# 
@@ -111,14 +112,15 @@ def serialize_files_to_json(paths):
 # 
 def main():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('source',
-						help='Directory of call & text HTML files to convert')
-	parser.add_argument('output',
-						nargs='?',
-						type=argparse.FileType('w'),
-						default=sys.stdout,
-						help='Where to write JSON output (default: stdout)')
-	args = parser.parse_args()
+	parser.add_argument(
+		'source',
+		help='Directory of call & text HTML files to convert')
+	parser.add_argument(
+		'output',
+		nargs   = '?',
+		type    = argparse.FileType('w'),
+		default = sys.stdout,
+		help    ='Where to write JSON output (default: stdout)')
 	files = glob.glob(os.path.join(args.source, '*.html'))
 	json = serialize_files_to_json(files)
 	with args.output as f:
