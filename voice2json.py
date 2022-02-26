@@ -1,13 +1,5 @@
-import os
-import re
-import io
-import sys
-import glob
-import json
-import argparse
-import datetime
+import os, re, io, sys, glob, json, argparse, datetime
 from operator import itemgetter
-
 from bs4 import BeautifulSoup
 
 DURATION_RE = r'PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?'
