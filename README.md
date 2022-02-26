@@ -65,19 +65,19 @@ optional arguments:
 						"tel": "+01234567890", // Stringified telephone number containing country code
 						"name": "John Doe" // Name (if known, otherwise an empty string)
 					}
-				}, 
+				},
 				...
-			], 
+			],
 			"contributors": [
 				{
 					"tel": "+01234567890", // Stringified telephone number containing country code
 					"name": "John Doe" // Name (if known, otherwise an empty string)
-				}, 
+				},
 				{
 					"tel": "+01234567890", // Your phone number
 					"name": "Me"
 				}
-			], 
+			],
 			"tags": [ // A list of tags for the conversation
 				"inbox", 
 				"sms"
