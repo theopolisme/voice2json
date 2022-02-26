@@ -1,4 +1,4 @@
-voice2json
+`voice2json`
 =============
 *Export your Google Voice call & text history as JSON*
 
