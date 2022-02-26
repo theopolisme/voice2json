@@ -90,12 +90,12 @@ optional arguments:
 
 Possible tags include:
 
- - **received** &ndash; an incoming call, received and answered
- - **missed** &ndash; an incoming call that was not answered
- - **placed** &ndash; an outgoing call
- - **inbox** &ndash; an item in the Google Voice inbox (e.g., a voicemail)
- - **voicemail** &ndash; a voicemail message
- - **unread** &ndash; used in conjunction with a voicemail to indicate that it is unread
- - **sms** &ndash; a text message
+ - **received** &mdash; an incoming call, received and answered
+ - **missed** &mdash; an incoming call that was not answered
+ - **placed** &mdash; an outgoing call
+ - **inbox** &mdash; an item in the Google Voice inbox (e.g., a voicemail)
+ - **voicemail** &mdash; a voicemail message
+ - **unread** &mdash; used in conjunction with a voicemail to indicate that it is unread
+ - **sms** &mdash; a text message
 
 Happy analyzing!
