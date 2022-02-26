@@ -35,56 +35,56 @@ optional arguments:
 
 ```js
 {
-    "records": [
+	"records": [
 
-        // Calls, voicemails, etc...
-        {
-            "date": "2013-01-27T04:21:24.000Z", // ISO-formatted date
-            "duration": 56000.0, // If applicable, the duration of the call
-            "tags": [ // Array of the tags(s) associated with the record (see below)
-                "received",
-                ...
-            ],
-            "contributors": [ // An array of participants in the call
-                {
-                    "tel": "+01234567890", // Stringified telephone number containing country code
-                    "name": "John Doe" // Name (if known, otherwise an empty string)
-                },
-                ...
-            ]
-        },
+		// Calls, voicemails, etc...
+		{
+			"date": "2013-01-27T04:21:24.000Z", // ISO-formatted date
+			"duration": 56000.0, // If applicable, the duration of the call
+			"tags": [ // Array of the tags(s) associated with the record (see below)
+				"received",
+				...
+			],
+			"contributors": [ // An array of participants in the call
+				{
+					"tel": "+01234567890", // Stringified telephone number containing country code
+					"name": "John Doe" // Name (if known, otherwise an empty string)
+				},
+				...
+			]
+		},
 
-        // Text messages
-        {
-            "date": "2014-05-07T19:26:51.780Z", // ISO-formatted start date of conversation
-            "conversation": [ // A list of messages in the conversation
-                {
-                    "date": "2014-05-07T19:26:51.780Z", // ISO-formatted date of message
-                    "message": "I'm right behind you.",
-                    "sender": {
-                        "tel": "+01234567890", // Stringified telephone number containing country code
-                        "name": "John Doe" // Name (if known, otherwise an empty string)
-                    }
-                }, 
-                ...
-            ], 
-            "contributors": [
-                {
-                    "tel": "+01234567890", // Stringified telephone number containing country code
-                    "name": "John Doe" // Name (if known, otherwise an empty string)
-                }, 
-                {
-                    "tel": "+01234567890", // Your phone number
-                    "name": "Me"
-                }
-            ], 
-            "tags": [ // A list of tags for the conversation
-                "inbox", 
-                "sms"
-            ]
-        }
+		// Text messages
+		{
+			"date": "2014-05-07T19:26:51.780Z", // ISO-formatted start date of conversation
+			"conversation": [ // A list of messages in the conversation
+				{
+					"date": "2014-05-07T19:26:51.780Z", // ISO-formatted date of message
+					"message": "I'm right behind you.",
+					"sender": {
+						"tel": "+01234567890", // Stringified telephone number containing country code
+						"name": "John Doe" // Name (if known, otherwise an empty string)
+					}
+				}, 
+				...
+			], 
+			"contributors": [
+				{
+					"tel": "+01234567890", // Stringified telephone number containing country code
+					"name": "John Doe" // Name (if known, otherwise an empty string)
+				}, 
+				{
+					"tel": "+01234567890", // Your phone number
+					"name": "Me"
+				}
+			], 
+			"tags": [ // A list of tags for the conversation
+				"inbox", 
+				"sms"
+			]
+		}
 
-        ...
+		...
 }
 ```
 
