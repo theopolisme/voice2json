@@ -26,7 +26,6 @@ optional arguments:
 ```
 
 ## Output
-
 `voice2json` produces a JSON file in the following format:
 
 ```js
